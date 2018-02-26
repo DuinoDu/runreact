@@ -4,11 +4,23 @@ module.exports = {
         filename: 'bundle.js'
     },
     module: {
-        rules: [{
-            test: /\.js$/,
-            use: ['babel-loader'],
-            exclude: /node_modules/
-        }]
+        rules: [
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env', 'es2015', 'react'],
+                        plugins: [['import', {"libraryName": "antd", "style": "css"}]]
+                    }
+                }
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            }
+        ]
     }
 
 };
